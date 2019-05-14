@@ -1,15 +1,19 @@
 # Sketch2Code Documentation
 
 ## Description
-Sketch2Code is a solution that uses AI to transform a handwritten user interface design from a picture to valid HTML markup code. 
+[Sketch2Code](https://www.ailab.microsoft.com/experiments/30c61484-d081-4072-99d6-e132d362b99d) is a solution that uses AI to transform a handwritten user interface design from a picture to valid HTML markup code. 
 
 ## Process flow
-The process of transformation of a handwritten image to HTML this solution implements is detailed as follows:
-1.	The user uploads an image through the website.
+The process of transformation of a handwritten image to HTML. How this solution is implemented is as follows:
+1.	First, the user uploads an image through the website.
 2.	A custom vision model predicts what HTML elements are present in the image and their location.
 3.	A handwritten text recognition service reads the text inside the predicted elements.
 4.	A layout algorithm uses the spatial information from all the bounding boxes of the predicted elements to generate a grid structure that accommodates all.
 5.	An HTML generation engine uses all these pieces of information to generate an HTML markup code reflecting the result.
+
+<p align="center">
+  <img width="560" height="300" src="https://github.com/Microsoft/ailab/blob/master/Sketch2Code/images/S2C_Homepage-Carousel.gif">
+</p>
 
 ## Architecture
 The Sketch2Code solution uses the following elements:
@@ -20,7 +24,6 @@ The Sketch2Code solution uses the following elements:
 -	An Azure Web App: User front-end to enable uploading a new design and see the generated HTML results.
 These elements form the architecture as follows:
 ![Sketch2Code Architecture](https://github.com/Microsoft/ailab/blob/master/Sketch2Code/images/architecture.png)
-
 
 
 ## How to configure the solution
@@ -36,7 +39,7 @@ A Microsoft Computer Vision Service is needed to perform handwritten character r
 To create this service go to your Azure Subscription and create your own service. Annotate the Endpoint and the Key to complete the configuration of the solution.
 
 ### Azure Blob Storage
-An Azure Blob Storage is used to store all the intermediary steps of the process.
+An [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) is used to store all the intermediary steps of the process.
 A new folder is created for each generation process with the following contents:
 -	\slices: Contains the cropped images used for text prediction.
 -	Original.png: image uploaded by the user.
@@ -57,7 +60,7 @@ The code for the provided Azure Function is located in the [Sketch2Code.Api](htt
 
 ### Azure Web App
 The [Sketch2Code.Web](https://github.com/Microsoft/ailab/tree/master/Sketch2Code/Sketch2Code.Web) contains the code used to implement the front-end website. Two parameters must be configured:
--	Sketch2CodeAppFunctionEndPoint: Endpoint to the Azure Function
--	storageUrl: Url for the Azure Storage. 
+1.	Sketch2CodeAppFunctionEndPoint: Endpoint to the Azure Function
+2.	storageUrl: Url for the Azure Storage. 
 
 
